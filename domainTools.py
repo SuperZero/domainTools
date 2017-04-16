@@ -26,8 +26,11 @@ def run():
         # whoisChecker()
         checker.nsResolver()
         kb.NSs = checker.NSs
+        print "=====Nameservers====="
+        for item in kb.NSs:
+            print item
+        print "====================="
     except Exception, e:
-        print "a"
         raise e
 
     if conf.zoneTransfer:
@@ -37,22 +40,20 @@ def run():
             kb.subDomain = checker.subDomain
             kb.flag = checker.flag
         except Exception, e:
-            print "b"
             raise e
 
     if conf.subDomainEnable:
         try:
             importDict()
-            myThreadPool(checker.domainQuery, conf.dict)
+            myThreadPool(checker.subDomainChecker, conf.dict)
         except Exception, e:
-            print "c"
             raise e
     
-    if len(kb.subDomains) > 0:
-        for item in kb.subDomains:
-            print item[0], " : ", item[1]
-    else:
-        print "No SubDomains Found."
+    # if len(kb.subDomains) > 0:
+    #    for item in kb.subDomains:
+    #        print item[0], " : ", item[1]
+    # else:
+    #    print "No SubDomains Found."
 
 
 def main():
@@ -83,4 +84,3 @@ def main():
 if __name__ == "__main__":
     main()
 
-# impor 和初始化应该分离

@@ -62,21 +62,14 @@ class Checker(object):
 					continue
 				self.NSs.append(str(rdata)[:-1])
 				nameservers.append(str(rdata)[:-1])
-				print "==============================="
-				print "nameserver:" + str(rdata)[:-1]
-				print "==============================="
-			# if len(nameservers):
-				# 错了应该存的是IP
-			# self.resolver.nameservers = []
-			# self.resolver.nameservers = nameservers
 		except dns.resolver.NXDOMAIN:
-			print "nsResolver,error\n"
+			# print "nsResolver,error\n"
 			pass
 		except dns.resolver.NoAnswer:
-			print "nsResolver,error\n"
+			# print "nsResolver,error\n"
 			pass
 		except dns.resolver.Timeout:
-			print "nsResolver,error\n"
+			# print "nsResolver,error\n"
 			pass
 
 	def AXFRChecker(self):
@@ -128,29 +121,13 @@ class Checker(object):
 				print "IXFRChecker\n"
 				print e
 
+
 	def domainQuery(self, domain):
 		"""
-		应该讲查询和存储分离开，实现domain查询函数的公用
 		"""
-		domain = domain.strip()
-		# print domain
 		try:
 			answer = self.resolver.query(domain)
-			for rrset in answer.response.answer:
-				for rdata in rrset:
-					if rdata is None:
-						continue
-						# print "None"
-					if rdata.rdtype == conf.A:
-						kb.subDomains.append([answer.qname.to_text()[:-1], rdata.address])
-						# print answer.qname[:-1]
-						# print rdata.address
-					elif rdata.rdtype == conf.CNAME:
-						kb.subDomains.append([answer.qname.to_text()[:-1], rdata.target])
-						conf.dict.append(answer.qname.to_text()[:-1])
-						# print answer.qname[:-1]
-					else:
-						pass
+			return answer
 		except dns.resolver.NXDOMAIN:
 			# print "NXDOMAIN"
 			pass
@@ -160,8 +137,37 @@ class Checker(object):
 		except dns.resolver.Timeout:
 			# print "Timeout."
 			pass
+			
+		 
+	def subDomainChecker(self, domain):
+		"""
+		"""
+		domain = domain.strip()
+		# print domain
+		try:
+			answer = self.domainQuery(domain)
+			for rrset in answer.response.answer:
+				for rdata in rrset:
+					if rdata is None:
+						continue
+						# print "None"
+					if rdata.rdtype == conf.A:
+						kb.subDomains.append([answer.qname.to_text()[:-1], rdata.address])
+						print answer.qname.to_text()[:-1], "==>", rdata.address
+						# print answer.qname[:-1]
+						# print rdata.address
+					elif rdata.rdtype == conf.CNAME:
+						kb.subDomains.append([answer.qname.to_text()[:-1], rdata.target])
+						conf.dict.append(answer.qname.to_text()[:-1])
+						print answer.qname.to_text()[:-1], "==>", rdata.target
+						# print answer.qname[:-1]
+					else:
+						pass
+		except:
+			pass
 	
 	def wildcardDNSChecker():
+    		
     		pass
 """
 	def ipWhoisChecker(self):

@@ -22,8 +22,8 @@ def checkArgs():
 
 
 def importDict():
-    count = 200
-    with open("./txt/bitquark_subdomains_top100K.txt", "r") as dictFile:
+    count = [conf.small, conf.large, conf.huge][conf.level-1]
+    with open(conf.dictPath, "r") as dictFile:
         # 增添错误处理
         for item in dictFile:
             conf.dict.append(str(item).strip()+'.'+conf.domain)

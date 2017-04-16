@@ -23,22 +23,28 @@ def cmdLineParser():
 
     parser.add_argument("--domain", "-d", required=True,
                         nargs=1, dest="domain")
-    parser.add_argument("--zonetransfer", "-z", required=False, 
-                        action="store_true", default=False, dest="zoneTransfer",
+    parser.add_argument("--zonetransfer", "-z", required=False,
+                        action="store_true", default=False,
+                        dest="zoneTransfer", 
                         help="Check the existence of exiZone Transfer.")
     parser.add_argument("--bruteforce", "-s",  required=False,
                         action="store_true", default=False, dest="subDomain",
-                        help="do the sub-domain bruteforce.")
+                        help="for sub-domain bruteforce.")
+    parser.add_argument("--level", "-l", required=False, dest="level",
+                        type=int, help="the size of dict(level:1 2 3)")
     parser.add_argument("--version", action="version", version="%(prog)s 0.1")
-    
+
     try:
         args = ''
         args = parser.parse_args(argv)
     except ArgumentError, e:
         raise e
-    
+
     cmdLineArgument.domain = args.domain[0]
     if args.zoneTransfer:
         cmdLineArgument.zoneTransfer = 1
     if args.subDomain:
         cmdLineArgument.subDomain = 1
+
+    if args.level in [1, 2, 3]:
+        cmdLineArgument.level = args.level

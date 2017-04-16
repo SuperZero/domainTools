@@ -10,8 +10,6 @@ from data import conf
 def myThreadPool(threadFucntion, dataList, numThread=None):
     if numThread is None:
         numThread = conf.numThread
-
     tpool = Pool(numThread)
     tpool.map(threadFucntion, dataList)
-
-    # 需要加上不断地读队列要不太长了。。Queue
+    # 增加终止条件
