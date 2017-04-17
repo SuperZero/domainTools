@@ -4,6 +4,7 @@
 
 from data import conf
 from data import cmdLineArgument
+from random import choice
 
 
 def checkDomain(domain):
@@ -31,3 +32,7 @@ def importDict():
             if count <= 0:
                 break
         dictFile.close()
+
+
+def randStr(length=conf.randStringLen):
+    return "".join(choice(conf.alphabet) for _ in xrange(0, length))

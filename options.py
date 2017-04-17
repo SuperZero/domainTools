@@ -2,13 +2,6 @@
 # -*- coding: utf-8 -*-
 # auth:hugo
 
-
-import dns.rdtypes.ANY.CNAME
-import dns.rdtypes.ANY.NS
-import dns.rdtypes.ANY.MX
-import dns.rdtypes.IN.A
-import dns.rdtypes.ANY.TXT
-import dns.rdtypes.IN.AAAA
 from data import conf
 from data import kb
 from data import cmdLineArgument
@@ -45,9 +38,9 @@ def _setConfAttributes():
     conf.A = 1
     conf.CNAME = 8
     conf.nameservers = ["223.5.5.5", "223.6.6.6", "114.114.114.114"]
-    conf.rdtyps = ([dns.rdtypes.ANY.CNAME, dns.rdtypes.ANY.NS,
-                    dns.rdtypes.ANY.MX, dns.rdtypes.IN.A,
-                    dns.rdtypes.ANY.TXT, dns.rdtypes.IN.AAAA])
+    # conf.rdtyps = ([dns.rdtypes.ANY.CNAME, dns.rdtypes.ANY.NS,
+    #                dns.rdtypes.ANY.MX, dns.rdtypes.IN.A,
+    #                dns.rdtypes.ANY.TXT, dns.rdtypes.IN.AAAA])
     conf.numThread = 5
     conf.dict = []
     conf.small = 2000
@@ -56,6 +49,8 @@ def _setConfAttributes():
     conf.levle = 1
     conf.dictPath = "./txt/bitquark_subdomains_top100K.txt"
     conf.subDomains = []
+    conf.randStringLen = 6
+    conf.alphabet = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789"
     conf.syntaxReg = r'[a-zA-Z\d-]{,63}(\.[a-zA-Z\d-]{,63})*'
     conf.syntaxReg1 = r'(?i)^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
     conf.syntaxReg2 = r'(?i)\b([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}\b'
