@@ -6,6 +6,7 @@
 from data import conf
 from data import kb
 from cymruwhois import Client
+from common import randStr
 # import whois
 # import os
 # import sys
@@ -121,12 +122,11 @@ class Checker(object):
 				print "IXFRChecker\n"
 				print e
 
-
-	def domainQuery(self, domain):
+	def domainQuery(self, domain, rdtype=1, rdclass=1):
 		"""
 		"""
 		try:
-			answer = self.resolver.query(domain)
+			answer = self.resolver.query(domain, rdtype, rdclass)
 			return answer
 		except dns.resolver.NXDOMAIN:
 			# print "NXDOMAIN"
@@ -138,7 +138,6 @@ class Checker(object):
 			# print "Timeout."
 			pass
 			
-		 
 	def subDomainChecker(self, domain):
 		"""
 		"""
@@ -166,9 +165,20 @@ class Checker(object):
 		except:
 			pass
 	
-	def wildcardDNSChecker():
-    		
-    		pass
+	def wildcardDNSChecker(self):
+		answer1 = self.domainQuery(randStr() + conf.domain, rdtype=1, rdclass=1)
+		answer2 = self.domainQuery(randStr() + conf.domain, rdtype=1, rdclass=1)
+		def getaddress(answer):
+			for rrset in answer.response.answer:
+				for rdata in rrset:
+					if rdata is None:
+						continue
+					if rdata.rdtype == conf.A:
+						return rdata.address
+		if getaddress(answer1) == getaddress(answer2):
+    			print "WildCard DNS Record Found.\n"
+
+
 """
 	def ipWhoisChecker(self):
 		req = self.client.lookup(conf.ip)
