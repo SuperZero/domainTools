@@ -8,6 +8,7 @@ from options import mergeConfWithCmd
 # from whoisChecker import whoisChecker
 from threads import myThreadPool
 from common import importDict
+from common import printOut
 from data import kb
 from data import conf
 import time
@@ -20,17 +21,17 @@ def run():
     try:
         from checker import checker
     except Exception, e:
-        print "aa"
+        printOut("aa", conf.debug)
         raise e
     
     try:
         # whoisChecker()
         checker.nsResolver()
         kb.NSs = checker.NSs
-        print "=====Nameservers====="
+        printOut("=====Nameservers=====", conf.info)
         for item in kb.NSs:
-            print item
-        print "====================="
+            printOut(item, conf.info)
+        printOut("=====================", conf.info)
         # checker.nsReplace() useless
     except Exception, e:
         raise e
@@ -87,5 +88,5 @@ if __name__ == "__main__":
     start = time.clock()
     main()
     end = time.clock()
-    print "Time: %f s" % (end - start)
+    printOut("Time: %f s" % (end - start), conf.info)
 

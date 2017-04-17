@@ -33,7 +33,7 @@ def cmdLineParser():
     parser.add_argument("--level", "-l", required=False, dest="level",
                         type=int, default=1, help="the size of dict(level:1 2 3)")
     parser.add_argument("--debug", "-v", required=False,
-                        action="store_true", default=False, dest="debug",
+                        action="store_true", default=False, dest="debugEnable",
                         help="print degug info.")
     parser.add_argument("--version", action="version", version="%(prog)s 0.1")
 
@@ -50,5 +50,5 @@ def cmdLineParser():
         cmdLineArgument.subDomain = True
     if args.level in [0, 1, 2, 3]:
         cmdLineArgument.level = args.level
-    if args.debug:
-        cmdLineArgument.debug = True
+    if args.debugEnable:
+        cmdLineArgument.debugEnable = True

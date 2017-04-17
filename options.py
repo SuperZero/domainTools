@@ -12,7 +12,7 @@ def mergeConfWithCmd():
     conf.zoneTransfer = cmdLineArgument.zoneTransfer
     conf.subDomainEnable = cmdLineArgument.subDomain
     conf.level = cmdLineArgument.level
-    conf.debugEnable = cmdLineArgument.debug
+    conf.debugEnable = cmdLineArgument.debugEnable
 
 
 def _setConfAttributes():
@@ -46,7 +46,7 @@ def _setConfAttributes():
     conf.debugEnable = False
     conf.info = 0
     conf.debug = 1
-    conf.waring = 2
+    conf.warning = 2
     conf.error = 3
     conf.dict = []
     conf.tiny = 20  # used for testing
@@ -79,6 +79,7 @@ def _setCmdlineAttributes():
     cmdLineArgument.zoneTransfer = None
     cmdLineArgument.subDomain = None
     cmdLineArgument.level = 1
+    cmdLineArgument.debugEnable = False
 
 
 def initOptions():

@@ -7,6 +7,7 @@ from data import conf
 from data import kb
 from cymruwhois import Client
 from common import randStr
+from common import printOut
 # import whois
 # import os
 # import sys
@@ -45,11 +46,11 @@ class Checker(object):
 		"""
 		"""
 		try:
-			print "=====Mail Exchanger====="
+			printOut("=====Mail Exchanger=====", conf.info)
 			answer = dns.resolver.query(self.domain)
 			for rdata in answer:
 				self.MXs.append(rdata)
-				print "mail exchanger: ", rdata.exchange, "preference: ", rdata.preference
+				printOut ("mail exchanger: " + rdata.exchange + "preference: " + rdata.preference, conf.info)
 		except:
 			pass
 
@@ -108,10 +109,10 @@ class Checker(object):
 								self.subDomain.append([name, rdata])
 								self.flag = 1
 				except Exception, e:
-					print e
+					printOut(e, conf.error)
 			except Exception, e:
-				print "AXFRChecker\n"
-				print e
+				# print "AXFRChecker\n"
+				printOut(e, conf.error)
 
 	def IXFRChecker(self):
 		"""
@@ -132,10 +133,10 @@ class Checker(object):
 								self.subDomain.append([name, rdata])
 								self.flag = 1
 				except Exception, e:
-					print e
+					printOut(e, conf.error)
 			except Exception, e:
-				print "IXFRChecker\n"
-				print e
+				# print "IXFRChecker\n"
+				printOut(e, conf.error)
 
 	def domainQuery(self, domain, rdtype=1, rdclass=1):
 		"""
@@ -168,13 +169,13 @@ class Checker(object):
 						# print "None"
 					if rdata.rdtype == conf.A:
 						kb.subDomains.append([answer.qname.to_text()[:-1], rdata.address])
-						print answer.qname.to_text()[:-1], "==>", rdata.address, "\n"
+						printOut(answer.qname.to_text()[:-1] + "==>" + rdata.address + "\n", conf.info)
 						# print answer.qname[:-1]
 						# print rdata.address
 					elif rdata.rdtype == conf.CNAME:
 						kb.subDomains.append([answer.qname.to_text()[:-1], rdata.target])
 						conf.dict.append(answer.qname.to_text()[:-1])
-						print answer.qname.to_text()[:-1], "==>", rdata.target, "\n"
+						printOut(answer.qname.to_text()[:-1] + "==>" + rdata.target + "\n", conf.info)
 						# print answer.qname[:-1]
 					else:
 						pass
@@ -192,7 +193,7 @@ class Checker(object):
 					if rdata.rdtype == conf.A:
 						return rdata.address
 		if getaddress(answer1) == getaddress(answer2):
-    			print "WildCard DNS Record Found.\n"
+    			printOut("WildCard DNS Record Found.\n", conf.info)
 
 
 '''

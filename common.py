@@ -45,9 +45,9 @@ def printOut(output, outlevel=None):
     if outlevel is None:
         outlevel = conf.info
     if (conf.debugEnable) and (outlevel == (conf.debug)):
-        print colored(output, 'white')
-    if outlevel == (conf.info):
         print colored(output, 'blue')
+    if outlevel == (conf.info):
+        print colored(output, 'white')
     if outlevel == (conf.warning):
         print colored(output, 'red')
     if outlevel == (conf.error):
