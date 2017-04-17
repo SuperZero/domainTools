@@ -43,10 +43,11 @@ def _setConfAttributes():
     #                dns.rdtypes.ANY.TXT, dns.rdtypes.IN.AAAA])
     conf.numThread = 5
     conf.dict = []
+    conf.tiny = 20  # used for testing
     conf.small = 2000
     conf.large = 10000
     conf.huge = 100000
-    # conf.levle = 1
+    conf.levle = 1
     conf.dictPath = "./txt/bitquark_subdomains_top100K.txt"
     conf.subDomains = []
     conf.randStringLen = 6

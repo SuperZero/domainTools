@@ -23,7 +23,7 @@ def checkArgs():
 
 
 def importDict():
-    count = [conf.small, conf.large, conf.huge][conf.level-1]
+    count = [conf.tiny, conf.small, conf.large, conf.huge][conf.level]
     with open(conf.dictPath, "r") as dictFile:
         # 增添错误处理
         for item in dictFile:

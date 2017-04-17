@@ -30,6 +30,7 @@ def run():
         for item in kb.NSs:
             print item
         print "====================="
+        # checker.nsReplace()
     except Exception, e:
         raise e
 

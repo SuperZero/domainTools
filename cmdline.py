@@ -45,6 +45,5 @@ def cmdLineParser():
         cmdLineArgument.zoneTransfer = 1
     if args.subDomain:
         cmdLineArgument.subDomain = 1
-        
-    if args.level in [1, 2, 3]:
+    if args.level in [0, 1, 2, 3]:
         cmdLineArgument.level = args.level

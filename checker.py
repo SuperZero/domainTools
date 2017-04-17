@@ -57,14 +57,13 @@ class Checker(object):
 		"""
 		#name = dns.name.from_text(domain)
 		"""
-		nameservers = []
 		try:
 			answer = dns.resolver.query(self.domain, 'NS')
 			for rdata in answer:
 				if rdata is None or rdata == "":
 					continue
 				self.NSs.append(str(rdata)[:-1])
-				nameservers.append(str(rdata)[:-1])
+				# nameservers.append(str(rdata)[:-1])
 		except dns.resolver.NXDOMAIN:
 			# print "nsResolver,error\n"
 			pass
@@ -74,6 +73,25 @@ class Checker(object):
 		except dns.resolver.Timeout:
 			# print "nsResolver,error\n"
 			pass
+
+	def nsReplace(self):
+		try:
+			print "123"
+			flag = True
+			if len(self.NSs) > 0:
+				for item in self.NSs:
+					answer = self.domainQuery(item)
+					for rrset in answer.response.answer:
+							for rdata in rrset:
+								if rdata is None:
+									continue
+									# print "None"
+								if flag:
+									self.resolver.nameservers = []
+									flag = False
+								self.resolver.nameservers = [rdata.address]
+		except:
+			pass				
 
 	def AXFRChecker(self):
 		"""
@@ -144,6 +162,7 @@ class Checker(object):
 		"""
 		"""
 		domain = domain.strip()
+		
 		# print domain
 		try:
 			answer = self.domainQuery(domain)
