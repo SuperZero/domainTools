@@ -46,7 +46,7 @@ def _setConfAttributes():
     conf.small = 2000
     conf.large = 10000
     conf.huge = 100000
-    conf.levle = 1
+    # conf.levle = 1
     conf.dictPath = "./txt/bitquark_subdomains_top100K.txt"
     conf.subDomains = []
     conf.randStringLen = 6

@@ -10,6 +10,8 @@ from common import randStr
 # import whois
 # import os
 # import sys
+import requests
+from BeautifulSoup import BeautifulSoup
 import dns.resolver
 import dns.zone
 import dns.query
@@ -32,7 +34,7 @@ class Checker(object):
 		self.resolver = dns.resolver.Resolver()
 		self.resolver.nameservers = conf.nameservers
 		self.client = Client()
-		self.req = None
+		# self.req = None
 	
 	def TXTChecker():
 		"""
@@ -179,7 +181,7 @@ class Checker(object):
     			print "WildCard DNS Record Found.\n"
 
 
-"""
+'''
 	def ipWhoisChecker(self):
 		req = self.client.lookup(conf.ip)
 
@@ -190,7 +192,22 @@ class Checker(object):
 		pass
     
 	def whoisChecker(self):
-		pass
-"""
+		chinaz = 'http://whois.chinaz.com/'+str(self.domain)
+		r = requests.get(url=chinaz)
+		
+		if r.status_code != 200:
+			print "查询失败"
+		
+		bs3 = BeautifulSoup(r.text)
+		bs3.find
+		registrar = ""
+		registrant = ""
+		mail = ""
+		creationtime = ""
+		expirationtime = ""
+		NSs = ""
+
+'''
+
 
 checker = Checker()

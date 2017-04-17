@@ -31,7 +31,7 @@ def cmdLineParser():
                         action="store_true", default=False, dest="subDomain",
                         help="for sub-domain bruteforce.")
     parser.add_argument("--level", "-l", required=False, dest="level",
-                        type=int, help="the size of dict(level:1 2 3)")
+                        type=int, default=1, help="the size of dict(level:1 2 3)")
     parser.add_argument("--version", action="version", version="%(prog)s 0.1")
 
     try:
@@ -45,6 +45,6 @@ def cmdLineParser():
         cmdLineArgument.zoneTransfer = 1
     if args.subDomain:
         cmdLineArgument.subDomain = 1
-
+        
     if args.level in [1, 2, 3]:
         cmdLineArgument.level = args.level

@@ -34,5 +34,7 @@ def importDict():
         dictFile.close()
 
 
-def randStr(length=conf.randStringLen):
+def randStr(length=None):
+    if length is None:
+        length = int(conf.randStringLen)
     return "".join(choice(conf.alphabet) for _ in xrange(0, length))
