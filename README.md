@@ -7,3 +7,10 @@ a domain tools
 2017-04-17  
 - 添加功能，修复bug, 尝试了修改nameservers，但是失败，放弃。
 - 增添输出信息的分级和色彩，(windows cmd终端不起效，powershell可以)
+
+#### 第三方库
+- requests
+- dnspython
+- BeautifulSoup3（暂未使用）
+- termcolor
+- cymruwhois（暂未使用） 
