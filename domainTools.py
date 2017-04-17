@@ -10,6 +10,7 @@ from threads import myThreadPool
 from common import importDict
 from data import kb
 from data import conf
+import time
 
 
 def run():
@@ -30,7 +31,7 @@ def run():
         for item in kb.NSs:
             print item
         print "====================="
-        # checker.nsReplace()
+        # checker.nsReplace() useless
     except Exception, e:
         raise e
 
@@ -83,5 +84,8 @@ def main():
 
 
 if __name__ == "__main__":
+    start = time.clock()
     main()
+    end = time.clock()
+    print "Time: %f s" % (end - start)
 

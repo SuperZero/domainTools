@@ -76,20 +76,15 @@ class Checker(object):
 
 	def nsReplace(self):
 		try:
-			print "123"
-			flag = True
 			if len(self.NSs) > 0:
-				for item in self.NSs:
-					answer = self.domainQuery(item)
-					for rrset in answer.response.answer:
-							for rdata in rrset:
-								if rdata is None:
-									continue
-									# print "None"
-								if flag:
-									self.resolver.nameservers = []
-									flag = False
-								self.resolver.nameservers = [rdata.address]
+				answer = self.domainQuery(self.NSs[0])
+				for rrset in answer.response.answer:
+						for rdata in rrset:
+							if rdata is None:
+								continue
+								# print "None"
+							self.resolver.nameservers = []
+							self.resolver.nameservers = [str(rdata.address)]
 		except:
 			pass				
 
@@ -173,13 +168,13 @@ class Checker(object):
 						# print "None"
 					if rdata.rdtype == conf.A:
 						kb.subDomains.append([answer.qname.to_text()[:-1], rdata.address])
-						print answer.qname.to_text()[:-1], "==>", rdata.address
+						print answer.qname.to_text()[:-1], "==>", rdata.address, "\n"
 						# print answer.qname[:-1]
 						# print rdata.address
 					elif rdata.rdtype == conf.CNAME:
 						kb.subDomains.append([answer.qname.to_text()[:-1], rdata.target])
 						conf.dict.append(answer.qname.to_text()[:-1])
-						print answer.qname.to_text()[:-1], "==>", rdata.target
+						print answer.qname.to_text()[:-1], "==>", rdata.target, "\n"
 						# print answer.qname[:-1]
 					else:
 						pass
