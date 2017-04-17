@@ -32,6 +32,9 @@ def cmdLineParser():
                         help="for sub-domain bruteforce.")
     parser.add_argument("--level", "-l", required=False, dest="level",
                         type=int, default=1, help="the size of dict(level:1 2 3)")
+    parser.add_argument("--debug", "-v", required=False,
+                        action="store_true", default=False, dest="debug",
+                        help="print degug info.")
     parser.add_argument("--version", action="version", version="%(prog)s 0.1")
 
     try:
@@ -44,6 +47,8 @@ def cmdLineParser():
     if args.zoneTransfer:
         cmdLineArgument.zoneTransfer = 1
     if args.subDomain:
-        cmdLineArgument.subDomain = 1
+        cmdLineArgument.subDomain = True
     if args.level in [0, 1, 2, 3]:
         cmdLineArgument.level = args.level
+    if args.debug:
+        cmdLineArgument.debug = True

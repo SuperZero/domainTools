@@ -12,6 +12,7 @@ def mergeConfWithCmd():
     conf.zoneTransfer = cmdLineArgument.zoneTransfer
     conf.subDomainEnable = cmdLineArgument.subDomain
     conf.level = cmdLineArgument.level
+    conf.debugEnable = cmdLineArgument.debug
 
 
 def _setConfAttributes():
@@ -42,6 +43,11 @@ def _setConfAttributes():
     #                dns.rdtypes.ANY.MX, dns.rdtypes.IN.A,
     #                dns.rdtypes.ANY.TXT, dns.rdtypes.IN.AAAA])
     conf.numThread = 5
+    conf.debugEnable = False
+    conf.info = 0
+    conf.debug = 1
+    conf.waring = 2
+    conf.error = 3
     conf.dict = []
     conf.tiny = 20  # used for testing
     conf.small = 2000

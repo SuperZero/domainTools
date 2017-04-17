@@ -5,6 +5,7 @@
 from data import conf
 from data import cmdLineArgument
 from random import choice
+from termcolor import colored
 
 
 def checkDomain(domain):
@@ -38,3 +39,17 @@ def randStr(length=None):
     if length is None:
         length = int(conf.randStringLen)
     return "".join(choice(conf.alphabet) for _ in xrange(0, length))
+
+
+def printOut(output, outlevel=None):
+    if outlevel is None:
+        outlevel = conf.info
+    if (conf.debugEnable) and (outlevel == (conf.debug)):
+        print colored(output, 'white')
+    if outlevel == (conf.info):
+        print colored(output, 'blue')
+    if outlevel == (conf.warning):
+        print colored(output, 'red')
+    if outlevel == (conf.error):
+        print colored(output, 'red')
+
