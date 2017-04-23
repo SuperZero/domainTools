@@ -11,7 +11,8 @@ a domain tools
 2017-04-23  
 - 添加对线程池的终止（https://noswap.com/blog/python-multiprocessing-keyboardinterrupt）(http://stackoverflow.com/questions/1408356/keyboard-interrupts-with-pythons-multiprocessing-pool)
 (http://stackoverflow.com/questions/11312525/catch-ctrlc-sigint-and-exit-multiprocesses-gracefully-in-python)
-- 美化信息输出
+- 美化信息输出  
+- 增加站长之家的域名whois 查询
 #### 第三方库
 - requests
 - dnspython
