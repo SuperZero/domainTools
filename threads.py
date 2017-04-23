@@ -14,8 +14,8 @@ from common import printOut
 def myThreadPool(threadFucntion, dataList, numThread=None):
     if numThread is None:
         numThread = conf.numThread
-    printOut(cpu_count(), conf.debug)
-    sleep(10)
+    printOut("The CPU count of Computer: "+str(cpu_count()), conf.debug)
+    # sleep(10)
     original_sigint_handler = signal.signal(signal.SIGINT, signal.SIG_IGN)
     signal.signal(signal.SIGINT, original_sigint_handler)
     tpool = Pool(numThread)

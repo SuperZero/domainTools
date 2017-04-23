@@ -45,11 +45,11 @@ def printOut(output, outlevel=None):
     if outlevel is None:
         outlevel = conf.info
     if (conf.debugEnable) and (outlevel == (conf.debug)):
-        print colored(output, 'blue')
+        print colored("[-]"+str(output), 'blue')
     if outlevel == (conf.info):
-        print colored(output, 'white')
+        print colored("[+]"+str(output), 'green')
     if outlevel == (conf.warning):
-        print colored(output, 'red')
+        print colored("[-]"+str(output), 'red')
     if outlevel == (conf.error):
-        print colored(output, 'red')
+        print colored("[-]"+str(output), 'red')
 

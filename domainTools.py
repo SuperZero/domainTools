@@ -28,10 +28,10 @@ def run():
         # whoisChecker()
         checker.nsResolver()
         kb.NSs = checker.NSs
-        printOut("=====Nameservers=====", conf.info)
+        printOut("-----Nameservers:-----", conf.info)
         for item in kb.NSs:
-            printOut(item, conf.info)
-        printOut("=====================", conf.info)
+            printOut("    "+item, conf.info)
+        printOut("----------------------", conf.info)
         # checker.nsReplace() useless
     except Exception, e:
         raise e
