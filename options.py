@@ -42,7 +42,7 @@ def _setConfAttributes():
     # conf.rdtyps = ([dns.rdtypes.ANY.CNAME, dns.rdtypes.ANY.NS,
     #                dns.rdtypes.ANY.MX, dns.rdtypes.IN.A,
     #                dns.rdtypes.ANY.TXT, dns.rdtypes.IN.AAAA])
-    conf.numThread = 5
+    conf.numThread = 20
     conf.debugEnable = False
     conf.info = 0
     conf.debug = 1

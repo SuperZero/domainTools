@@ -12,6 +12,7 @@ from common import printOut
 # import os
 # import sys
 import requests
+import threading
 from BeautifulSoup import BeautifulSoup
 import dns.resolver
 import dns.zone
@@ -157,11 +158,10 @@ class Checker(object):
 	def subDomainChecker(self, domain):
 		"""
 		"""
-		domain = domain.strip()
-		
 		# print domain
 		try:
 			answer = self.domainQuery(domain)
+			# printOut(threading.current_thread(), conf.debug)
 			for rrset in answer.response.answer:
 				for rdata in rrset:
 					if rdata is None:
@@ -169,19 +169,21 @@ class Checker(object):
 						# print "None"
 					if rdata.rdtype == conf.A:
 						kb.subDomains.append([answer.qname.to_text()[:-1], rdata.address])
-						printOut(answer.qname.to_text()[:-1] + "==>" + rdata.address + "\n", conf.info)
+						printOut(answer.qname.to_text()[:-1] + "==>" + rdata.address, conf.info)
 						# print answer.qname[:-1]
 						# print rdata.address
 					elif rdata.rdtype == conf.CNAME:
 						kb.subDomains.append([answer.qname.to_text()[:-1], rdata.target])
 						conf.dict.append(answer.qname.to_text()[:-1])
-						printOut(answer.qname.to_text()[:-1] + "==>" + rdata.target + "\n", conf.info)
+						printOut(answer.qname.to_text()[:-1] + "==>" + rdata.target, conf.info)
 						# print answer.qname[:-1]
 					else:
 						pass
-		except:
+		except KeyboardInterrupt:
+			printOut("Stop", conf.debug)
+		except Exception:
 			pass
-	
+		 
 	def wildcardDNSChecker(self):
 		answer1 = self.domainQuery(randStr() + conf.domain, rdtype=1, rdclass=1)
 		answer2 = self.domainQuery(randStr() + conf.domain, rdtype=1, rdclass=1)
