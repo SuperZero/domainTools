@@ -16,6 +16,6 @@ a domain tools
 #### 第三方库
 - requests
 - dnspython
-- BeautifulSoup3（暂未使用）
+- BeautifulSoup4
 - termcolor
 - cymruwhois（暂未使用） 
