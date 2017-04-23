@@ -25,6 +25,8 @@ def run():
         raise e
     
     try:
+        checker.whoisChecker()
+        time.sleep(1)
         # whoisChecker()
         checker.nsResolver()
         kb.NSs = checker.NSs
@@ -32,6 +34,7 @@ def run():
         for item in kb.NSs:
             printOut("    "+item, conf.info)
         printOut("----------------------", conf.info)
+        time.sleep(1)
         # checker.nsReplace() useless
     except Exception, e:
         raise e

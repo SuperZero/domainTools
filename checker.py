@@ -12,8 +12,7 @@ from common import printOut
 # import os
 # import sys
 import requests
-import threading
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 import dns.resolver
 import dns.zone
 import dns.query
@@ -197,8 +196,37 @@ class Checker(object):
 		if getaddress(answer1) == getaddress(answer2):
     			printOut("WildCard DNS Record Found.\n", conf.info)
 
+	def whoisChecker(self):
+    		"""
+			another API: https://www.whois.com/whois/baidu.com, need https
+			no support of edu domian.
+			"""
+		chinaz = 'http://whois.chinaz.com/'+str(self.domain)
+		r = requests.get(url=chinaz)
+		
+		if r.status_code != 200:
+			print "查询失败"
+		bs = BeautifulSoup(r.text, "html.parser")
+		
+		def NoResult(input):
+			result = bs.find("div", text=input)
+			if result is None:
+				return "None"
+			else:
+				return result.find_next_siblings()[0].span.string.encode('gb18030')
 
-'''
+		printOut("-----Whois info-----", conf.info)
+		printOut("Registrar:\t\t" + NoResult("注册商") , conf.info)
+		printOut("Contact:\t\t" + NoResult("联系人") , conf.info)
+		printOut("Phone:\t\t" + NoResult("联系电话") , conf.info)
+		printOut("Updated Date:\t\t" + NoResult("更新时间") , conf.info)
+		printOut("Creation Date:\t" + NoResult("创建时间") , conf.info)
+		printOut("Expiration Date:\t" + NoResult("过期时间") , conf.info)
+		printOut("Company Name:\t" + NoResult("公司") , conf.info)
+		# printOut("Registrar: " + NoResult("注册商") , conf.info)
+		printOut("-------------------", conf.info)
+
+"""
 	def ipWhoisChecker(self):
 		req = self.client.lookup(conf.ip)
 
@@ -207,24 +235,6 @@ class Checker(object):
 
 	def domainWhoisChecker(self):
 		pass
-    
-	def whoisChecker(self):
-		chinaz = 'http://whois.chinaz.com/'+str(self.domain)
-		r = requests.get(url=chinaz)
-		
-		if r.status_code != 200:
-			print "查询失败"
-		
-		bs3 = BeautifulSoup(r.text)
-		bs3.find
-		registrar = ""
-		registrant = ""
-		mail = ""
-		creationtime = ""
-		expirationtime = ""
-		NSs = ""
-
-'''
-
+"""
 
 checker = Checker()
